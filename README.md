@@ -1,7 +1,7 @@
 # How to use
 
-   <script type="text/javascript" src="shistory.min.js"></script>
-   <script type="text/javascript">
+   &lt;script type="text/javascript" src="shistory.min.js"&gt;&lt;/script&gt;
+   &lt;script type="text/javascript"&gt;
    // Bind your event listeners first
    // The callback takes no arguments
    sHistory.addEventListener(function () {
@@ -43,4 +43,4 @@
      // Remove all states (hash changes to #)
      sHistory.removeState();
    });
-   </script>
+   &lt;/script&gt;
