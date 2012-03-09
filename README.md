@@ -1,9 +1,9 @@
 # How to use
 
-   &lt;script type="text/javascript" src="shistory.min.js"&gt;&lt;/script&gt;
-   &lt;script type="text/javascript"&gt;
+Include like normal. The original code is also 100% compatible with Closure Compiler.
+
    // Bind your event listeners first
-   // The callback takes no arguments
+   // This callback takes no arguments
    sHistory.addEventListener(function () {
      // Get the page number, returns string
      sHistory.getState('page_number');
@@ -43,4 +43,6 @@
      // Remove all states (hash changes to #)
      sHistory.removeState();
    });
-   &lt;/script&gt;
+
+   // Start the history (required)
+   sHistory.start();
