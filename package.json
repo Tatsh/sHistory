@@ -1,0 +1,22 @@
+{
+  "name": "sHistory",
+  "title": "sHistory",
+  "version": "1.0.0",
+  "keywords": ["sutra", "ender", "hashchange", "history"],
+  "description": "An easy-to-use independent hashchange library.",
+  "contributors": [
+    "Andrew Udvare @tatsh http://andrew.udvare.com"
+  ],
+  "homepage": "https://github.com/tatsh/sHistory",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tatsh/sHistory.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tatsh/sHistory/issues"
+  },
+  "license": {
+    "name": "MIT",
+    "url": "http://www.opensource.org/licenses/mit-license.php"
+  }
+}
