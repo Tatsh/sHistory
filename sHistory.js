@@ -277,7 +277,29 @@ sHistory.removeState = function (stateName) {
   }
 
   if (sHistory.getState(stateName) !== null) {
-    // TODO
+    // Get the entire hash and remove this state
+    var states = location.hash.substr(1).split('&');
+    var toPush = {};
+    for (var split, i = 0; i < states.length; i++) {
+      split = states[i].split('=');
+      if (split[0] === stateName) {
+        continue;
+      }
+
+      toPush[split[0]] = decodeURIComponent(split[1]);
+    }
+
+    var length = 0;
+    for (var key in toPush) {
+      if (toPush.hasOwnProperty(key)) {
+        length++;
+      }
+    }
+    if (length === 0) {
+      sHistory.removeState();
+    }
+
+    sHistory.pushStates(toPush);
   }
 };
 /**
