@@ -1,7 +1,7 @@
 {
   "name": "sHistory",
   "title": "sHistory",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "keywords": ["sutra", "ender", "hashchange", "history"],
   "description": "An easy-to-use independent hashchange library.",
   "contributors": [
@@ -18,5 +18,7 @@
   "license": {
     "name": "MIT",
     "url": "http://www.opensource.org/licenses/mit-license.php"
-  }
+  },
+  "main": "./sHistory.js",
+  "ender": "./ender.js"
 }
