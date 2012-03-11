@@ -313,10 +313,12 @@ sHistory.removeState = function (stateName) {
  * @param {string} key Key to use. Case-sensitive.
  * @param {string} [castTo='string'] Cast to string, number (integer), float,
  *   boolean.
- * @returns {string|number|boolean|null} The state value, or null if no such
- *   state exists.
+ * @param {*} [defaultValue] The default value to return if the value does not
+ *   exist.
+ * @returns {string|number|boolean|null} The state value, the default value if
+ *   specified, or null if no such state exists.
  */
-sHistory.getState = function (key, castTo) {
+sHistory.getState = function (key, castTo, defaultValue) {
   if (!key || key === '__t') {
     return null;
   }
@@ -333,6 +335,10 @@ sHistory.getState = function (key, castTo) {
       lcRet = ret.toLowerCase();
       break;
     }
+  }
+
+  if (ret === null && defaultValue !== undefined) {
+    return defaultValue;
   }
 
   if (castTo !== 'string') {
