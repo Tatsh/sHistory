@@ -210,6 +210,7 @@ sHistory.pushStates = function (stateObject, merge) {
   var euc = encodeURIComponent;
   var url = sHistory._getFullURI();
   var key, hash = '#';
+  var keyValues;
 
   if (!location.hash) {
     merge = false;
@@ -218,7 +219,7 @@ sHistory.pushStates = function (stateObject, merge) {
   if (merge) {
     // Compare the 2 objects, still need to keep order or 2 states would be pushed
     // TODO Make this more efficient.
-    var keyValues = location.hash.substr(1).split('&');
+    keyValues = location.hash.substr(1).split('&');
     var found = false, split;
 
     for (key in stateObject) {
@@ -246,22 +247,27 @@ sHistory.pushStates = function (stateObject, merge) {
     hash += keyValues.join('&');
   }
   else {
-    for (key in stateObject) {
-      // Reserved key
-      if (key === '__t') {
-        continue;
-      }
+    keyValues = [];
 
+    for (key in stateObject) {
       if (stateObject.hasOwnProperty(key)) {
+        // Reserved key
+        if (key === '__t') {
+          continue;
+        }
+
         if (stateObject[key] === true) {
           stateObject[key] = 'true';
         }
         else if (stateObject[key] === false) {
           stateObject[key] = 'false';
         }
-        hash += key + '=' + euc(stateObject[key]);
+
+        keyValues.push(key + '=' + euc(stateObject[key]));
       }
     }
+
+    hash = '#' + keyValues.join('&');
   }
 
   location.href = url + hash;
@@ -299,7 +305,7 @@ sHistory.removeState = function (stateName) {
       sHistory.removeState();
     }
 
-    sHistory.pushStates(toPush);
+    sHistory.pushStates(toPush, false);
   }
 };
 /**
