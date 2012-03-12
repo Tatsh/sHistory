@@ -313,8 +313,8 @@ sHistory.removeState = function (stateName) {
  * @param {string} key Key to use. Case-sensitive.
  * @param {string} [castTo='string'] Cast to string, number (integer), float,
  *   boolean.
- * @param {*} [defaultValue] The default value to return if the value does not
- *   exist.
+ * @param {string|number|boolean|null} [defaultValue] The default value to
+ *   return if the value does not exist.
  * @returns {string|number|boolean|null} The state value, the default value if
  *   specified, or null if no such state exists.
  */
