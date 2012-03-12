@@ -1,4 +1,4 @@
-/*jshint scripturl:true */
+/*jshint scripturl:true, expr:true */
 /**
  * Page state management. Uses real hashcange event if possible. Partially
  *   based on work by Ben Alman.

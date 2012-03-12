@@ -1,3 +1,4 @@
+/*jshint sub:true */
 // Exports for Closure
 window['sHistory'] = sHistory;
 window['sHistory']['start'] = sHistory.start;
