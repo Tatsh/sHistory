@@ -16,6 +16,7 @@ var sHistory = function () {
     /**
      * @param {string} [url]
      * @returns {string}
+     * @private
      */
     var getFragment = function (url) {
       url = url || location.href;
