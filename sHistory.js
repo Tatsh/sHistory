@@ -1,9 +1,8 @@
 /*jshint scripturl:true, expr:true */
 /**
  * Page state management. Uses real hashcange event if possible. Partially
- *   based on work by Ben Alman.
- *
- * To compile: closure-compiler --warning_level VERBOSE --compilation_level ADVANCED_OPTIMIZATIONS --js sHistory.js --js export.js --output_wrapper "(function(){%output%}())" > shistory.min.js
+ *   based on work by Ben Alman.<br>
+ * To compile: <code>closure-compiler --warning_level VERBOSE --compilation_level ADVANCED_OPTIMIZATIONS --js sHistory.js --js export.js --output_wrapper "(function(){%output%}())" > shistory.min.js</code>
  *
  * @see http://benalman.com/projects/jquery-bbq-plugin/
  * @constructor
@@ -328,6 +327,11 @@ sHistory.getState = function (key, castTo, defaultValue) {
 
   var keyValues = location.hash.substr(1).split('&');
   var split, ret = null, lcRet = null;
+  var trues = {
+    'true': 1,
+    'on': 1,
+    'yes': 1
+  };
 
   for (var i = 0; i < keyValues.length; i++) {
     split = keyValues[i].split('=');
@@ -359,16 +363,7 @@ sHistory.getState = function (key, castTo, defaultValue) {
 
       case 'boolean':
       case 'bool':
-        if (lcRet === 'true') {
-          ret = true;
-        }
-        else if (lcRet === 'false') {
-          ret = false;
-        }
-        else {
-          ret = !!ret;
-        }
-        break;
+        ret = trues[lcRet] !== undefined;
     }
   }
 
