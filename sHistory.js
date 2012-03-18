@@ -332,6 +332,11 @@ sHistory.getState = function (key, castTo, defaultValue) {
     'on': 1,
     'yes': 1
   };
+  var falses = {
+    'false': 1,
+    'no': 1,
+    'off': 1
+  };
 
   for (var i = 0; i < keyValues.length; i++) {
     split = keyValues[i].split('=');
@@ -363,7 +368,13 @@ sHistory.getState = function (key, castTo, defaultValue) {
 
       case 'boolean':
       case 'bool':
-        ret = trues[lcRet] !== undefined;
+        if (trues[lcRet] !== undefined) {
+          return true;
+        }
+        else if (falses[lcRet] !== undefined) {
+          return false;
+        }
+        return !!ret;
     }
   }
 
