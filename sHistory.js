@@ -309,16 +309,22 @@ sHistory.removeState = function (stateName) {
   }
 };
 /**
- * Get a state by key name.
- * @param {string} key Key to use. Case-sensitive.
+ * Get a state by key name. If no arguments are passed, returns whether or not
+ *   location.hash is empty.
+ * @param {string} [key] Key to use. Case-sensitive.
  * @param {string} [castTo='string'] Cast to string, number (integer), float,
  *   boolean.
  * @param {string|number|boolean|null} [defaultValue] The default value to
  *   return if the value does not exist.
- * @returns {string|number|boolean|null} The state value, the default value if
- *   specified, or null if no such state exists.
+ * @returns {string|number|boolean|null} If location.hash is empty string, the
+ *   state value, the default value if specified, or null if no such state
+ *   exists.
  */
 sHistory.getState = function (key, castTo, defaultValue) {
+  if (arguments.length === 0) {
+    return !!location.hash;
+  }
+
   if (!key || key === '__t') {
     return null;
   }
