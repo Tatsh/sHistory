@@ -116,7 +116,7 @@ var sHistory = function () {
   return this;
 };
 /**
- * If the browser supports onhashchange natively.
+ * If the browser supports the <code>hashchange</code> event natively.
  * @type boolean
  */
 sHistory.hasNativeSupport = (function () {
@@ -126,7 +126,6 @@ sHistory.hasNativeSupport = (function () {
 /**
  * Just in case called incorrectly.
  * @private
- * @type function()
  */
 sHistory.prototype.constructor = function () {};
 /**
@@ -147,9 +146,9 @@ sHistory._getFullURI = function () {
 /**
  * Push a state. Note that setting an empty state can cause a browser to
  *   scroll.
- * @param {string} stateKey State name to push. If merge is true, then this
- *   will replace the current state of the same key name. The <code>__t</code>
- *   key is reserved.
+ * @param {string} stateKey State name to push. If merge is <code>true</code>,
+ *   then this will replace the current state of the same key name. The
+ *   <code>__t</code> key is reserved.
  * @param {string|boolean|number} stateValue Value to set.
  * @param {boolean} [merge=true] Whether or not to merge with the current
  *   state.
@@ -199,7 +198,8 @@ sHistory.pushState = function (stateKey, stateValue, merge) {
 };
 /**
  * Push states. Note that the <code>__t</code> key is reserved.
- * @param {Object} stateObject Object of keys (string) to values (string|number|boolean).
+ * @param {Object} stateObject Object of keys to values (string, number, or
+ *   boolean).
  * @param {boolean} [merge=true] Whether or not to merge with the current
  *   state.
  */
@@ -273,8 +273,8 @@ sHistory.pushStates = function (stateObject, merge) {
   location.href = url + hash;
 };
 /**
- * Remove a state.
- * @param {string|undefined} [stateName] If not specified, removes all states.
+ * Remove a state. If no arguments are passed, all states will be removed.
+ * @param {string} [stateName] The state to remove.
  */
 sHistory.removeState = function (stateName) {
   if (stateName === undefined) {
@@ -310,15 +310,15 @@ sHistory.removeState = function (stateName) {
 };
 /**
  * Get a state by key name. If no arguments are passed, returns whether or not
- *   location.hash is empty.
+ *   <code>location.hash</code> is empty.
  * @param {string} [key] Key to use. Case-sensitive.
  * @param {string} [castTo='string'] Cast to string, number (integer), float,
  *   boolean.
  * @param {string|number|boolean|null} [defaultValue] The default value to
  *   return if the value does not exist.
- * @returns {string|number|boolean|null} If location.hash is empty string, the
- *   state value, the default value if specified, or null if no such state
- *   exists.
+ * @returns {string|number|boolean|null} If <code>location.hash</code> is an
+ *   empty string, the state value requrested, the default value if specified,
+ *   or <code>null</code> if no such state exists.
  */
 sHistory.getState = function (key, castTo, defaultValue) {
   if (arguments.length === 0) {
@@ -425,8 +425,9 @@ sHistory._dispatchFirst = function () {
   }
 };
 /**
- * Trigger the first hashchange event. Should be called once per page and only
- *   after all hashchange listeners have been registered.
+ * Trigger the first <code>hashchange</code> event. Should be called once per
+ *   page and only after all listeners have been registered using
+ *   <code>sHistory.addEventListener</code>.
  * @param {string} [defaultState] The default state key name.
  * @param {string|number|boolean} [defaultStateValue] The default state value.
  */
@@ -456,7 +457,12 @@ sHistory.start = function (defaultState, defaultStateValue) {
  */
 sHistory._eventListeners = [];
 /**
- * Add an event listener.
+ * Add an event listener. These are called every time the hash changes, which
+ *   means that if one key changes but another state stays the same, then all
+ *   listeners will still be called.
+ * <p>If you want to prevent the callback from running repetitively, save the
+ *   last state value outside of the function and make sure it is different
+ *   within the callback before the callback can continue.</p>
  * @param {function()} func Callback.
  */
 sHistory.addEventListener = function (func) {
