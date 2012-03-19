@@ -465,5 +465,10 @@ sHistory.addEventListener = function (func) {
     return;
   }
 
-  window.addEventListener('hashchange', func, false);
+  if (window.addEventListener) {
+    window.addEventListener('hashchange', func, false);
+  }
+  else if (window.attachEvent) {
+    window.attachEvent('onhashchange', func);
+  }
 };
