@@ -7,6 +7,8 @@
 
 # How to use
 
+Documentation: http://tatsh.github.com/sHistory/symbols/sHistory.html
+
 Include like normal. The original code is also 100% compatible with Closure Compiler.
 
     // Bind your event listeners first
