@@ -1,3 +1,10 @@
+# Compatibility
+
+* Internet Explorer 7+
+* Firefox 3.6+
+* Chrome
+* Safari 5+
+
 # How to use
 
 Include like normal. The original code is also 100% compatible with Closure Compiler.
