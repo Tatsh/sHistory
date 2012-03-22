@@ -134,7 +134,7 @@ sHistory.prototype.constructor = function () {};
  * @returns {string}
  */
 sHistory._getFullURI = function () {
-  var url = location.protocol + '//' + location.hostname;
+  var url = location.protocol + '//' + location.hostname + location.pathname;
   var qs = location.search ? location.search.substr(1) : '';
 
   if (qs) {
