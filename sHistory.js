@@ -322,7 +322,11 @@ sHistory.removeState = function (stateName) {
  */
 sHistory.getState = function (key, castTo, defaultValue) {
   if (arguments.length === 0) {
-    return !location.hash.match(/^#__t=\d+$|^#$/) || !location.hash;
+    if (!location.hash.match(/^#__t=\d+$|^#$/)) {
+      return false;
+    }
+
+    return !!location.hash;
   }
 
   if (!key || key === '__t') {
