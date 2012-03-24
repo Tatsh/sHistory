@@ -212,7 +212,7 @@ sHistory.pushStates = function (stateObject, merge) {
   var key, hash = '#';
   var keyValues;
 
-  if (!location.hash || !location.hash === '#') {
+  if (!location.hash || location.hash === '#') {
     merge = false;
   }
 
