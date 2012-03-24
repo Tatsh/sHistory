@@ -212,7 +212,7 @@ sHistory.pushStates = function (stateObject, merge) {
   var key, hash = '#';
   var keyValues;
 
-  if (!location.hash) {
+  if (!location.hash || !location.hash === '#') {
     merge = false;
   }
 
@@ -322,7 +322,7 @@ sHistory.removeState = function (stateName) {
  */
 sHistory.getState = function (key, castTo, defaultValue) {
   if (arguments.length === 0) {
-    return !!location.hash;
+    return !location.hash.match(/^#__t=\d+$|^#$/) || !location.hash;
   }
 
   if (!key || key === '__t') {
@@ -406,17 +406,15 @@ sHistory._dispatchFirst = function () {
       window.dispatchEvent(event);
     }
     else {
+      // For others, manually trigger the event by changing location.hash replacing __t with a new value
       var hash = location.hash;
-      if (hash !== '') {
-        hash = hash.replace(/[\&\#]__t=[0-9]+\&?/, '');
-        hash += '&__t=' + (function () {
-          var alpha = '0123456789', output = '';
-          for (var i = 0; i < 10; i++) {
-            output += alpha.charAt(Math.floor(Math.random() * 9));
-          }
-          return output;
-        })();
+      hash = hash.replace(/([\&\#])__t=+\d+\&?/, '$1');
+      if (hash.length !== 1) { // would be '#'
+        hash += '&';
       }
+      // Fix any malformations
+      hash = hash.replace(/([\&=])+/g, '$1').replace(/^\#\&/, '#');;
+      hash += '__t=' + (new Date()).getTime();
       location.hash = hash;
     }
   }
