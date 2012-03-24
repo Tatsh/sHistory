@@ -27,7 +27,7 @@ var sHistory = function () {
     iframe.setAttribute('tabindex', -1);
     iframe.setAttribute('title', 'empty');
     iframe.setAttribute('src', 'javascript:0');
-    iframe.setAttribute('id', 'shistory');
+    //iframe.setAttribute('id', 'shistory');
     iframe.style.display = 'none';
 
     // The original hash
@@ -108,9 +108,20 @@ var sHistory = function () {
       iframe.addEventListener('load', loadOnceCallback, false);
     }
 
-
     // Add the iframe to the page
     document.body.appendChild(iframe);
+
+    if (document.attachEvent) {
+      // Keep the title in sync so the history entries look nicer
+      document.attachEvent('onpropertychange', function () {
+        try {
+          if (window.event.propertyName === 'title') {
+            iframe.contentWindow.document.title = document.title;
+          }
+        }
+        catch (e) {}
+      });
+    }
   }
 
   return this;
