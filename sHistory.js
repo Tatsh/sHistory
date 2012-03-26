@@ -428,7 +428,7 @@ sHistory._dispatchFirst = function () {
         hash += '&';
       }
       // Fix any malformations
-      hash = hash.replace(/([\&=])+/g, '$1').replace(/^\#\&/, '#');;
+      hash = hash.replace(/([\&=])+/g, '$1').replace(/^\#\&/, '#');
       hash += '__t=' + (new Date()).getTime();
       location.hash = hash;
     }
